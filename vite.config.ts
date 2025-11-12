@@ -2,28 +2,18 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
+// ✅ Complete, working Vite config for GitHub Pages
 export default defineConfig({
-  //
-  // FIX:
-  // The 'base' path should be the name of your repository.
-  // The angle brackets '<' and '>' were likely causing the issue.
-  // This tells Vite that your app will be hosted in a subfolder
-  // (e.g., https://username.github.io/Smart-Hire-Ai/)
-  // and not at the root (https://username.github.io/).
-  //
+  // This tells Vite your app is hosted at: https://username.github.io/Smart-Hire-Ai/
   base: '/Smart-Hire-Ai/',
 
   plugins: [react()],
+
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-    
-    // NOTE: This alias list is very unusual.
-    // It's not necessarily wrong, but it's a very specific way
-    // to handle dependencies. If you still have issues, you might
-    // want to double-check if all these aliases are truly necessary
-    // and aren't conflicting with Vite's standard dependency resolution.
-    // The '@' alias, however, is standard and correct.
     alias: {
+      '@': path.resolve(__dirname, './src'),
+      // Optional aliases (these are unusual, so remove if unnecessary)
       'vaul@1.1.2': 'vaul',
       'sonner@2.0.3': 'sonner',
       'recharts@2.15.2': 'recharts',
@@ -61,13 +51,14 @@ export default defineConfig({
       '@radix-ui/react-aspect-ratio@1.1.2': '@radix-ui/react-aspect-ratio',
       '@radix-ui/react-alert-dialog@1.1.6': '@radix-ui/react-alert-dialog',
       '@radix-ui/react-accordion@1.2.3': '@radix-ui/react-accordion',
-      '@': path.resolve(__dirname, './src'),
     },
   },
+
   build: {
     target: 'esnext',
-    outDir: 'build', // Make sure your GitHub Pages workflow deploys from 'build'
+    outDir: 'dist', // ✅ Default output folder for Vite
   },
+
   server: {
     port: 3000,
     open: true,
