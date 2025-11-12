@@ -3,10 +3,26 @@ import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
 export default defineConfig({
-  base: '/<Smart-Hire-Ai>/', // 👈 Add this line
+  //
+  // FIX:
+  // The 'base' path should be the name of your repository.
+  // The angle brackets '<' and '>' were likely causing the issue.
+  // This tells Vite that your app will be hosted in a subfolder
+  // (e.g., https://username.github.io/Smart-Hire-Ai/)
+  // and not at the root (https://username.github.io/).
+  //
+  base: '/Smart-Hire-Ai/',
+
   plugins: [react()],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    
+    // NOTE: This alias list is very unusual.
+    // It's not necessarily wrong, but it's a very specific way
+    // to handle dependencies. If you still have issues, you might
+    // want to double-check if all these aliases are truly necessary
+    // and aren't conflicting with Vite's standard dependency resolution.
+    // The '@' alias, however, is standard and correct.
     alias: {
       'vaul@1.1.2': 'vaul',
       'sonner@2.0.3': 'sonner',
@@ -50,7 +66,7 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
-    outDir: 'build',
+    outDir: 'build', // Make sure your GitHub Pages workflow deploys from 'build'
   },
   server: {
     port: 3000,
