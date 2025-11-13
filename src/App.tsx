@@ -1020,6 +1020,10 @@ export default function App() {
                               : 'bg-blue-600 text-white hover:bg-blue-700'
                           }`}
                         >
+                            </button>
+                        <button className="px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                          View Details
+                        </button>
                           {hasApplied ? 'Applied' : 'Apply Now'}
                       </div>
                     </div>
